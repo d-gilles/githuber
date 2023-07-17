@@ -1,3 +1,7 @@
 /package/__pycache__/*
 .env
 .python-version
+__pycache__/
+.gcloudignore
+.ipynb_checkpoints/
+app.yaml
