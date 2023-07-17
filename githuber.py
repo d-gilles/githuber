@@ -26,8 +26,12 @@ prob_we = int(os.getenv('PROB_WE', '85'))
 
 URL = os.environ.get('URL', 'http://gutenberg.net.au/ebooks03/0300771h.html')
 
-# scrape the book
+
 def scrape():
+    '''
+    Scrapes the book from the url.
+    '''
+
     # get the url
     if URL is not None:
         page = requests.get(URL)
@@ -42,8 +46,12 @@ def scrape():
     else:
         return ''
 
-# push to github
+
 def push_to_github(do=True):
+    '''
+    Pushes a line of the book to github.
+    If do is False, it will not push to github, but print some info.
+    '''
 
     # get the book
     book = scrape()
@@ -71,12 +79,14 @@ def push_to_github(do=True):
 
     return
 
-# schedule the pushes
-def schedule_pushes(push_min=1, push_max=12, prob=20, prob_we=85):
 
+def schedule_pushes(push_min=1, push_max=12, prob=20, prob_we=85):
+    '''
+    Checks if it is a weekday and if the mood is right.
+    Calculates the number of pushes to do today.
+    '''
     is_weekend = datetime.today().weekday() >= 5
     mood = random.random()
-    lazy = random.random()
     print("GITHUBER - The nice guy who pushes to github \n")
     print('Is it a weekend?: ', is_weekend)
     if is_weekend:
@@ -100,6 +110,6 @@ if __name__ == '__main__':
     # do the pushes
     num_pushes = schedule_pushes(push_min, push_max, prob, prob_we)
     for push in range(num_pushes):
-        push_to_github(do=False)
+        push_to_github(do=True)
         print (push)
         sleep(3)

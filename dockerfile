@@ -15,10 +15,11 @@ RUN pip install --upgrade pip \
     && apt-get update \
     && apt-get install -y build-essential
 
-
 # Copy necessary files
 COPY githuber.py /app/githuber.py
 COPY requirements.txt /app/requirements.txt
+
+EXPOSE 8080
 
 # Change user
 USER githuber
